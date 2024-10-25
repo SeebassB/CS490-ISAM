@@ -1,6 +1,6 @@
+package src;
 
-
-public class armProcess implements processBase
+public class ArmProcess implements processBase
 {
 
 
@@ -16,7 +16,7 @@ public class armProcess implements processBase
 
     public void closearm()
     {
-        System.out.println("close the arm!");
+        System.out.println("close the src.arm!");
     }
 
 
@@ -28,7 +28,7 @@ public class armProcess implements processBase
     @Override
     public void logProcess(String input)
     {
-        System.out.println("arm - " + input);
+        System.out.println("src.arm - " + input);
     }
 
 
@@ -36,7 +36,7 @@ public class armProcess implements processBase
     @Override
     public void logImportant(String input)
     {
-        System.out.println("arm - important - " + input);
+        System.out.println("src.arm - important - " + input);
     }
 
     public void execute()

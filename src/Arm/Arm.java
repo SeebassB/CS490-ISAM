@@ -1,3 +1,4 @@
+package src;
 
 public class arm
 {
@@ -23,7 +24,7 @@ public class arm
 
     public void printArmPosition()
     {
-        System.out.println("current arm position: (x = " + currentX + ", y = " + currentY + ", z = " + currentZ + ")");
+        System.out.println("current src.arm position: (x = " + currentX + ", y = " + currentY + ", z = " + currentZ + ")");
 
     }
 

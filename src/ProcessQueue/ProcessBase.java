@@ -1,3 +1,5 @@
+package src;
+
 public interface processBase
 {
     public void printProcess(String input);

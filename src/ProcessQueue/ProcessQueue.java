@@ -1,22 +1,21 @@
+package src;
 
 
-
-
-public class processQueue
+public class ProcessQueue
 {
-    processControlBlock head;
-    processControlBlock tail;
+    ProcessControlBlock head;
+    ProcessControlBlock tail;
 
-    public processQueue()
+    public ProcessQueue()
     {
         this.head = null;
         this.tail = null;
     }
 
     //assumes the list is sorted
-    boolean addProcess(processControlBlock toBeAdded)
+    boolean addProcess(ProcessControlBlock toBeAdded)
     {
-        System.out.println("ADDING START");
+        System.out.println("Adding process: \"" + toBeAdded.toString() + "\"");
 
         //check if the list is empty
         if(this.head == null)
@@ -27,14 +26,14 @@ public class processQueue
             return true;
         }
 
-        processControlBlock current = head;
-        processControlBlock secondary = null;
+        ProcessControlBlock current = head;
+        ProcessControlBlock secondary = null;
 
         //iterate through the list to find the proper priority insert
         while(current != null)
         {
             System.out.println("WHILE= "+current.getName());
-            //find the first element that is higher in prioirty number
+            //find the first element that is higher in priority number
             if(toBeAdded.getPriority() < current.getPriority())
             {
                 System.out.println("FIRST IF= "+current.getName());
@@ -47,7 +46,6 @@ public class processQueue
                     head.setPrevious(toBeAdded);
                     toBeAdded.setNext(this.head);
                     head = toBeAdded;
-                    return true;
                 }
                 else //not the first card
                 {
@@ -57,8 +55,8 @@ public class processQueue
                     toBeAdded.setPrevious(secondary);
                     current.setPrevious(toBeAdded);
                     toBeAdded.setNext(current);
-                    return true;
                 }
+                return true;
             }
 
             //go to the next in the list
@@ -76,10 +74,10 @@ public class processQueue
         return true;
     }
 
-    public processControlBlock executeFirst()
+    public ProcessControlBlock executeFirst()
     {
         //save head and remove it from list
-        processControlBlock temp = head;
+        ProcessControlBlock temp = head;
         head = head.getNext();
         temp.execute();
         return temp;
@@ -89,7 +87,7 @@ public class processQueue
     public void printQueue()
     {
 
-        processControlBlock temp = head;
+        ProcessControlBlock temp = head;
 
         System.out.println("----------PRINTING QUEUE-------");
 
@@ -107,12 +105,12 @@ public class processQueue
 
 
 
-    public processControlBlock getHead()
+    public ProcessControlBlock getHead()
     {
         return head;
     }
 
-    public processControlBlock getTail()
+    public ProcessControlBlock getTail()
     {
         return tail;
     }
