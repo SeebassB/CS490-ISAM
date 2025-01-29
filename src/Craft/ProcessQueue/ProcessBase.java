@@ -1,4 +1,6 @@
-public interface processBase
+package src.Craft.ProcessQueue;
+
+public interface ProcessBase
 {
     public void printProcess(String input);
 

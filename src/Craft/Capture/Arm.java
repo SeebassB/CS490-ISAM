@@ -1,19 +1,20 @@
+package src.Craft.Capture;
 
-public class arm
+public class Arm
 {
     int currentX;
     int currentY;
     int currentZ;
 
 
-    public arm()
+    public Arm()
     {
         currentX = 0;
         currentY = 0;
         currentZ = 0;
     }
 
-    public arm(int x, int y, int z)
+    public Arm(int x, int y, int z)
     {
         currentX = x;
         currentY = y;
@@ -23,7 +24,7 @@ public class arm
 
     public void printArmPosition()
     {
-        System.out.println("current arm position: (x = " + currentX + ", y = " + currentY + ", z = " + currentZ + ")");
+        System.out.println("current src.arm position: (x = " + currentX + ", y = " + currentY + ", z = " + currentZ + ")");
 
     }
 
