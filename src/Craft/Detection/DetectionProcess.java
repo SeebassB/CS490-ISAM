@@ -1,7 +1,8 @@
-package src;
+package src.Craft.Detection;
 
-public class DetectionProcess implements processBase
-{
+import src.Craft.ProcessQueue.ProcessBase;
+
+public class DetectionProcess implements ProcessBase{
 
     public void scanIR()
     {

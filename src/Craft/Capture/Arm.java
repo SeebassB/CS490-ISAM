@@ -1,20 +1,20 @@
-package src;
+package src.Craft.Capture;
 
-public class arm
+public class Arm
 {
     int currentX;
     int currentY;
     int currentZ;
 
 
-    public arm()
+    public Arm()
     {
         currentX = 0;
         currentY = 0;
         currentZ = 0;
     }
 
-    public arm(int x, int y, int z)
+    public Arm(int x, int y, int z)
     {
         currentX = x;
         currentY = y;

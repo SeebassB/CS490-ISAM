@@ -1,4 +1,4 @@
-package src;
+package src.Craft.ProcessQueue;
 
 
 public class ProcessQueue
@@ -13,7 +13,7 @@ public class ProcessQueue
     }
 
     //assumes the list is sorted
-    boolean addProcess(ProcessControlBlock toBeAdded)
+    public boolean addProcess(ProcessControlBlock toBeAdded)
     {
         System.out.println("Adding process: \"" + toBeAdded.toString() + "\"");
 

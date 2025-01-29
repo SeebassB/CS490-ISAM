@@ -1,7 +1,8 @@
-package src;
+package src.Craft.Capture;
 
-public class ArmProcess implements processBase
-{
+import src.Craft.ProcessQueue.ProcessBase;
+
+public class ArmProcess implements ProcessBase {
 
 
 

@@ -1,3 +1,10 @@
+package src;
+
+import src.Craft.Capture.ArmProcess;
+import src.Craft.Detection.DetectionProcess;
+import src.Craft.ProcessQueue.ProcessControlBlock;
+import src.Craft.ProcessQueue.ProcessQueue;
+
 public class Main
 {
     public static void main(String[] args)

@@ -1,4 +1,4 @@
-package src;
+package src.Craft.ProcessQueue;
 
 public class ProcessControlBlock
 {
@@ -7,7 +7,7 @@ public class ProcessControlBlock
     int priority;
     private ProcessControlBlock previous;
     private ProcessControlBlock next;
-    private processBase proc;
+    private ProcessBase proc;
 
     public ProcessControlBlock()
     {
@@ -18,7 +18,7 @@ public class ProcessControlBlock
     }
 
 
-    public ProcessControlBlock(String name, int priority, processBase proc)
+    public ProcessControlBlock(String name, int priority, ProcessBase proc)
     {
         this.name = name;
         this.priority = priority;
