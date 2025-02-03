@@ -109,6 +109,7 @@ public class ProcessControlBlock
 
     public void execute()
     {
+        System.out.println("Executing process: "+this.toString());
         this.proc.execute();
     }
 }

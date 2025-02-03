@@ -12,7 +12,11 @@ public class ProcessQueue
         this.tail = null;
     }
 
-    //assumes the list is sorted
+    /**
+     * Adds a process to the ProcessQueue
+     * @param toBeAdded ProcessControlBlock you want to add to the ProcessQueue
+     * @return boolean pass or fail of the addition
+     * */
     public boolean addProcess(ProcessControlBlock toBeAdded)
     {
         System.out.println("Adding process: \"" + toBeAdded.toString() + "\"");
@@ -74,8 +78,22 @@ public class ProcessQueue
         return true;
     }
 
+
+    /**
+     * Executes the first process in the ProcessQueue
+     * checks to see if the first block is Null
+     * @return ProcessControlBlock the process being executed, when null returns NULL
+     * */
     public ProcessControlBlock executeFirst()
     {
+
+     if(head == null)
+     {
+         System.out.println("Execute: list is empty");
+         return tail;
+
+     }
+
         //save head and remove it from list
         ProcessControlBlock temp = head;
         head = head.getNext();
@@ -83,7 +101,10 @@ public class ProcessQueue
         return temp;
     }
 
-
+    /**
+     * Prints the current queue
+     * No return, prints into Console
+     * */
     public void printQueue()
     {
 
@@ -101,20 +122,31 @@ public class ProcessQueue
     }
 
 
+    /**
+     * Check the ProcessQueue to see if its empty
+     * @return boolean whether the list is empty
+     * */
+    public boolean isEmpty()
+    {
+        return head == null;
+    }
 
-
-
-
+    /**
+     * Get the head of the ProcessQueue
+     * @return ProcessControlBlock the PCB that is the head
+     * */
     public ProcessControlBlock getHead()
     {
         return head;
     }
 
+    /**
+     * Get the tail of the ProcessQueue
+     * @return ProcessControlBlock the PCB that is the tail
+     * */
     public ProcessControlBlock getTail()
     {
         return tail;
     }
-
-
 }
 
