@@ -8,14 +8,21 @@ import src.Craft.ProcessQueue.ProcessQueue;
 import java.lang.Math;
 
 
+
+
+
 public class craftThread implements Runnable
 {
+
+    ProcessQueue mainQueue = new ProcessQueue();
+
+
     public void run()
     {
 
-        System.out.println("starting craft thre");
+        System.out.println("starting craft thread");
 
-        ProcessQueue mainQueue = new ProcessQueue();
+       // ProcessQueue mainQueue = new ProcessQueue();
 
         mainQueue.addProcess(new ProcessControlBlock("hello",2, new ArmProcess()));
 
@@ -62,6 +69,7 @@ public class craftThread implements Runnable
 
         public boolean addProceesToCraft(ProcessControlBlock newProcess)
         {
+            mainQueue.addProcess(newProcess);
             return true;
         }
 }
