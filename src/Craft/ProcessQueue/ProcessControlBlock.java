@@ -5,19 +5,26 @@ public class ProcessControlBlock
 
     private final String name;
     int priority;
+    int processID;
     private ProcessControlBlock previous;
     private ProcessControlBlock next;
     private ProcessBase proc;
 
+    /**
+     * Default PCB creator
+     * */
     public ProcessControlBlock()
     {
         this.name     = "DEFAULT NAME";
         this.priority = 5;
+        this.processID = -1;
         this.previous = null;
         this.next   = null;
     }
 
-
+    /**
+     * Barebones PCB creator
+     * */
     public ProcessControlBlock(String name, int priority, ProcessBase proc)
     {
         this.name = name;
@@ -27,38 +34,27 @@ public class ProcessControlBlock
         this.proc = proc;
     }
 
-    public ProcessControlBlock(String name, int priority, ProcessControlBlock previous, ProcessControlBlock next )
+    /**
+     * Full PCB Constructor
+     * */
+    public ProcessControlBlock(String name, int priority,int ID, ProcessControlBlock previous, ProcessControlBlock next )
     {
         this.name = name;
         this.priority = priority;
+        this.processID = ID;
         this.previous = previous;
         this.next   = next;
     }
 
-    public ProcessControlBlock updateProcess(String name, int priority, ProcessControlBlock next, ProcessControlBlock previous)
+
+    public void updateProcessID(int processID)
     {
-        return new ProcessControlBlock(name, priority, next, previous);
+        this.processID = processID;
     }
 
-    public ProcessControlBlock updateName(String name)
-    {
-        return new ProcessControlBlock(name, this.priority, this.previous, this.next);
-    }
 
-    public ProcessControlBlock updatePriority(int priority)
-    {
-        return new ProcessControlBlock(this.name, priority, this.previous, this.next);
-    }
 
-    public ProcessControlBlock updatePrevious(ProcessControlBlock previous)
-    {
-        return new ProcessControlBlock(name, this.priority, previous, this.next);
-    }
 
-    public ProcessControlBlock updateNext(ProcessControlBlock next)
-    {
-        return new ProcessControlBlock(name, this.priority, this.previous, next);
-    }
 
 
     public String getName()
@@ -69,6 +65,11 @@ public class ProcessControlBlock
     public int getPriority()
     {
         return this.priority;
+    }
+
+    public int getProcessID()
+    {
+        return this.processID;
     }
 
     public void setPriority(int priority)
@@ -99,8 +100,15 @@ public class ProcessControlBlock
 
     public String toString()
     {
-        return this.name+", "+this.priority;
+        return this.name + ", " + this.priority + ", " + this.processID;
     }
+
+    public String detailedToString()
+    {
+
+        return this.name + ", " + this.priority + ", " + this.processID +", "+this.previous +","+this.next;
+    }
+
 
     public int compareTo(ProcessControlBlock p)
     {
