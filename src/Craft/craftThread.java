@@ -10,13 +10,23 @@ import java.lang.Math;
 
 
 
-
+/**
+ * Main thread that runs in the craft, should only be one of the ever running at a time
+ * */
 public class craftThread implements Runnable
 {
 
+    /**
+     * This is the priority queue of the craft.
+     * This is used to hold the current tasks that the craft has to do.
+     */
     ProcessQueue mainQueue = new ProcessQueue();
 
 
+
+    /**
+     * The beginning of the thread that runs the craft
+     * */
     public void run()
     {
 
@@ -38,28 +48,34 @@ public class craftThread implements Runnable
         mainQueue.addProcess(new ProcessControlBlock("heartbeat", 5, new HeartbeatProcess()));
 
 
-        int i=0;
+int i=0;
 
+        /**
+         * Internal loop used to capture the craft's thread.
+         * Puts a "dummy" process onto an empty stack to keep the craft running
+         * */
         while(true)
         {
 
-            if(Math.random() > 0.9)
-            {
-                mainQueue.addProcess(new ProcessControlBlock("random insert",1, new ArmProcess()));
-            }
 
             mainQueue.printQueue();
 
-                mainQueue.executeFirst();
-            try {
+            mainQueue.executeFirst();
+
+            //one second delay in the while loop, for stability, can be easily lowered
+            try
+            {
                 Thread.sleep(1000);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e)
+            {
                 throw new RuntimeException(e);
             }
 
-            if(mainQueue.isEmpty()) {
+            //check to see if the queue is empty after executing, when empty put said dummy heartbeat process
+            if(mainQueue.isEmpty())
+            {
                 mainQueue.addProcess(new ProcessControlBlock("heartbeat", 5, new HeartbeatProcess()));
-                System.out.println("adding heartbeat to an empty stack: "+i);
             }
 
         i++;
@@ -67,6 +83,12 @@ public class craftThread implements Runnable
 
         }
 
+
+        /**
+         * This method is used when adding a process to the craft "Externally"
+         * Will be used exclusively by the simulator
+         * @param newProcess the process you want to add into the queue
+         * */
         public boolean addProceesToCraft(ProcessControlBlock newProcess)
         {
             mainQueue.addProcess(newProcess);
