@@ -5,11 +5,14 @@ public class ProcessQueue
 {
     ProcessControlBlock head;
     ProcessControlBlock tail;
+    int processID ;
+
 
     public ProcessQueue()
     {
         this.head = null;
         this.tail = null;
+        this.processID = 0;
     }
 
     /**
@@ -19,6 +22,12 @@ public class ProcessQueue
      * */
     public boolean addProcess(ProcessControlBlock toBeAdded)
     {
+
+        toBeAdded.updateProcessID(this.processID);
+        this.processID++;
+
+        System.out.println("TESTING PROCESSID UPDATE "+this.processID);
+
         System.out.println("Adding process: \"" + toBeAdded.toString() + "\"");
 
         //check if the list is empty
@@ -26,7 +35,7 @@ public class ProcessQueue
         {
             this.head = toBeAdded;
             this.tail = toBeAdded;
-            System.out.println("\nADDPROCESS " + toBeAdded.getName() + " at position 0 since the queue is empty");
+            System.out.println("ADDPROCESS " + toBeAdded.getName() + " at position 0 since the queue is empty\n");
             return true;
         }
 
@@ -36,16 +45,13 @@ public class ProcessQueue
         //iterate through the list to find the proper priority insert
         while(current != null)
         {
-            System.out.println("WHILE= "+current.getName());
             //find the first element that is higher in priority number
             if(toBeAdded.getPriority() < current.getPriority())
             {
-                System.out.println("FIRST IF= "+current.getName());
 
                 //check to see if this is the new head
                 if(secondary == null)
                 {
-                    System.out.println("SECONDARY IF= "+current.getName());
 
                     head.setPrevious(toBeAdded);
                     toBeAdded.setNext(this.head);
@@ -53,7 +59,6 @@ public class ProcessQueue
                 }
                 else //not the first card
                 {
-                    System.out.println("SECONDARY ELSE= "+current.getName());
 
                     secondary.setNext(toBeAdded);
                     toBeAdded.setPrevious(secondary);
@@ -74,6 +79,7 @@ public class ProcessQueue
         tail.setNext(toBeAdded);
         toBeAdded.setPrevious(tail);
         tail = toBeAdded;
+        System.out.println("ADDPROCESS " + toBeAdded.getName() + " at position ? since the queue is NOT EMPTY\n");
 
         return true;
     }
