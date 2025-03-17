@@ -15,6 +15,15 @@ public class ProcessQueue
         this.processID = 0;
     }
 
+    public void setHead(ProcessControlBlock newHead) {
+        this.head = newHead;
+        if (this.head != null) {
+            this.head.setPrevious(null); // Ensure the new head has no previous process
+        } else {
+            this.tail = null; // If the queue becomes empty, update the tail as well
+        }
+    }
+
     /**
      * Adds a process to the ProcessQueue
      * @param toBeAdded ProcessControlBlock you want to add to the ProcessQueue

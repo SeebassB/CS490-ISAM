@@ -1,6 +1,6 @@
-package Craft.Analysis;
+package src.Craft.Analysis;
 
-import Craft.ProcessQueue.ProcessBase;
+import src.Craft.ProcessQueue.ProcessBase;
 
 
 public class AnalysisProcess implements ProcessBase {

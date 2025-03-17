@@ -5,18 +5,14 @@ import src.Craft.ProcessQueue.ProcessControlBlock;
 
 import javax.swing.*;
 
-public class main extends JFrame
+public class main
 {
-
-    JTextField textField1;
-    JButton mybutton;
-
     public main()
     {
 
     }
 
-
+/*
     public static void main(String[] args)
     {
 
@@ -28,5 +24,14 @@ public class main extends JFrame
         //start the GUI
 
 
+    }
+    */
+
+    public static void main(String[] args) {
+        // Ensure GUI starts on the Event Dispatch Thread for thread safety
+        SwingUtilities.invokeLater(() -> {
+            ProcessManagerUI ui = new ProcessManagerUI();
+            ui.setVisible(true);
+        });
     }
 }
