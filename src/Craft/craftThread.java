@@ -20,8 +20,7 @@ public class craftThread implements Runnable
      * This is the priority queue of the craft.
      * This is used to hold the current tasks that the craft has to do.
      */
-    ProcessQueue mainQueue = new ProcessQueue();
-
+    private static final ProcessQueue mainQueue = new ProcessQueue();
 
 
 
@@ -35,14 +34,14 @@ public class craftThread implements Runnable
 
        // ProcessQueue mainQueue = new ProcessQueue();
 
-        mainQueue.addProcess(new ProcessControlBlock("hello",2, new ArmProcess()));
+       // mainQueue.addProcess(new ProcessControlBlock("hello",2, new ArmProcess(), mainQueue));
 
-        mainQueue.addProcess(new ProcessControlBlock("world",3,  new DetectionProcess()));
-        mainQueue.addProcess(new ProcessControlBlock("mememe",3, new DetectionProcess()));
-        mainQueue.addProcess(new ProcessControlBlock("whatever",5, new DetectionProcess()));
-        mainQueue.addProcess(new ProcessControlBlock("asdasdadas",4, new ArmProcess()));
-        mainQueue.addProcess(new ProcessControlBlock("four",4, new ArmProcess()));
-        mainQueue.addProcess(new ProcessControlBlock("zero",0, new ArmProcess()));
+        //mainQueue.addProcess(new ProcessControlBlock("world",3,  new DetectionProcess(), mainQueue));
+        //mainQueue.addProcess(new ProcessControlBlock("mememe",3, new DetectionProcess(), mainQueue));
+        //mainQueue.addProcess(new ProcessControlBlock("whatever",5, new DetectionProcess(), mainQueue));
+        //mainQueue.addProcess(new ProcessControlBlock("asdasdadas",4, new ArmProcess(), mainQueue));
+        //mainQueue.addProcess(new ProcessControlBlock("four",4, new ArmProcess(), mainQueue));
+        //mainQueue.addProcess(new ProcessControlBlock("zero",0, new ArmProcess(), mainQueue));
         mainQueue.addProcess(new ProcessControlBlock("twotwo",2, new ArmProcess()));
         mainQueue.addProcess(new ProcessControlBlock("oneone",1, new ArmProcess()));
         mainQueue.addProcess(new ProcessControlBlock("threethree",3, new ArmProcess()));
@@ -93,5 +92,11 @@ public class craftThread implements Runnable
             mainQueue.addProcess(newProcess);
             return true;
         }
+
+        public static ProcessQueue getMainQueue()
+        {
+            return mainQueue;
+        }
+
 }
 

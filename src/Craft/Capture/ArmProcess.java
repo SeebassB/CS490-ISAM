@@ -1,10 +1,12 @@
 package src.Craft.Capture;
 
 import src.Craft.ProcessQueue.ProcessBase;
+import src.Craft.ProcessQueue.ProcessQueue;
+import src.Craft.craftThread;
 
 public class ArmProcess implements ProcessBase {
 
-
+    final private ProcessQueue queue = craftThread.getMainQueue();;
 
 
 
@@ -45,4 +47,6 @@ public class ArmProcess implements ProcessBase {
         System.out.println("EXECUTING ARM PROCESS");
 
     }
+
+
 }

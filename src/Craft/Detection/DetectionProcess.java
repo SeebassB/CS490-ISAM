@@ -1,8 +1,12 @@
 package src.Craft.Detection;
 
 import src.Craft.ProcessQueue.ProcessBase;
+import src.Craft.ProcessQueue.ProcessQueue;
+import src.Craft.craftThread;
 
 public class DetectionProcess implements ProcessBase{
+
+    final private ProcessQueue queue = craftThread.getMainQueue();;
 
     public void scanIR()
     {
@@ -48,6 +52,8 @@ public class DetectionProcess implements ProcessBase{
 
     }
 
+
+    @Override
     public void execute()
     {
 

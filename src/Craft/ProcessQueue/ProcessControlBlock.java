@@ -9,18 +9,8 @@ public class ProcessControlBlock
     private ProcessControlBlock previous;
     private ProcessControlBlock next;
     private ProcessBase proc;
+    private ProcessQueue queue;
 
-    /**
-     * Default PCB creator
-     * */
-    public ProcessControlBlock()
-    {
-        this.name     = "DEFAULT NAME";
-        this.priority = 5;
-        this.processID = -1;
-        this.previous = null;
-        this.next   = null;
-    }
 
     /**
      * Barebones PCB creator
@@ -37,7 +27,7 @@ public class ProcessControlBlock
     /**
      * Full PCB Constructor
      * */
-    public ProcessControlBlock(String name, int priority,int ID, ProcessControlBlock previous, ProcessControlBlock next )
+    public ProcessControlBlock(String name, int priority,int ID, ProcessControlBlock previous, ProcessControlBlock next)
     {
         this.name = name;
         this.priority = priority;
@@ -97,6 +87,10 @@ public class ProcessControlBlock
         this.previous = previous;
     }
 
+    public ProcessQueue getQueue()
+    {
+        return queue;
+    }
 
     public String toString()
     {
