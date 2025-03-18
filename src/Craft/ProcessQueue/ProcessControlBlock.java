@@ -10,6 +10,8 @@ public class ProcessControlBlock
     private ProcessControlBlock previous;
     private ProcessControlBlock next;
     private ProcessBase proc;
+    private ProcessQueue queue;
+
 
     /**
      * Default PCB creator
@@ -42,6 +44,7 @@ public class ProcessControlBlock
      */
     public ProcessControlBlock(String name, int priority, int executionTime, ProcessControlBlock previous, ProcessControlBlock next) {
         this.processID = idCounter++;
+
         this.name = name;
         this.priority = priority;
         this.executionTime = executionTime;
@@ -100,8 +103,15 @@ public class ProcessControlBlock
         this.previous = previous;
     }
 
+
+    public ProcessQueue getQueue()
+    {
+        return queue;
+    }
+      
     public int getExecutionTime() {
         return this.executionTime;
+
     }
 
     public String toString()
