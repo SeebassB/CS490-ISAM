@@ -1,12 +1,14 @@
 package src.Craft.Capture;
 
+import src.Craft.CraftProcesses.HeartbeatProcess;
 import src.Craft.ProcessQueue.ProcessBase;
+import src.Craft.ProcessQueue.ProcessControlBlock;
 import src.Craft.ProcessQueue.ProcessQueue;
 import src.Craft.craftThread;
 
 public class ArmProcess implements ProcessBase {
 
-    final private ProcessQueue queue = craftThread.getMainQueue();;
+    final private ProcessQueue queue = craftThread.getMainQueue();
 
 
 
@@ -45,6 +47,13 @@ public class ArmProcess implements ProcessBase {
     public void execute()
     {
         System.out.println("EXECUTING ARM PROCESS");
+        //
+        //
+        //
+        //
+        //
+        queue.addProcess(new ProcessControlBlock("goodbye",1, new HeartbeatProcess()));
+
 
     }
 
