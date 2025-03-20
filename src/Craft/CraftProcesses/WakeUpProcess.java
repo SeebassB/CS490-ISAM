@@ -8,7 +8,7 @@ import src.Craft.craftThread;
 public class WakeUpProcess implements ProcessBase
 {
 
-        final private ProcessQueue queue = craftThread.getMainQueue();;
+        final private ProcessQueue queue = craftThread.getMainQueue();
 
 
         @Override
@@ -29,6 +29,8 @@ public class WakeUpProcess implements ProcessBase
         @Override
         public void execute() {
             System.out.println("this process runs first after launch");
+            System.out.println("Startup all systems and prepare the craft for main loop");
+            queue.addProcess(new ProcessControlBlock("From Wakeup",5, new HeartbeatProcess()));
 
         }
 

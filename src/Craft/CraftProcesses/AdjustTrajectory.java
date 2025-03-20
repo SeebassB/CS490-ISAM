@@ -1,16 +1,15 @@
 package src.Craft.CraftProcesses;
 
-import src.Craft.Detection.ScanWithCamera;
+import src.Craft.Capture.MoveArm;
 import src.Craft.ProcessQueue.ProcessBase;
 import src.Craft.ProcessQueue.ProcessControlBlock;
 import src.Craft.ProcessQueue.ProcessQueue;
 import src.Craft.craftThread;
 
-public class HeartbeatProcess implements ProcessBase
+public class AdjustTrajectory implements ProcessBase
 {
 
     final private ProcessQueue queue = craftThread.getMainQueue();
-
 
 
     @Override
@@ -29,17 +28,17 @@ public class HeartbeatProcess implements ProcessBase
     }
 
     @Override
-    public void execute()
-    {
-        System.out.println("heartbeat executed");
+    public void execute() {
+        System.out.println("once debris is determined adjust the craft's trajectory to go get it");
 
-        double test = Math.random();
 
-        if(test>0.5)
-            queue.addProcess(new ProcessControlBlock("from heartbeat",2, new ScanWithCamera()));
-        else
-            queue.addProcess(new ProcessControlBlock("heartbeat to heartbeat",5, new HeartbeatProcess()));
+            System.out.println("Moving the craft towards debris");
+            queue.addProcess(new ProcessControlBlock("From AdjustTrajectory", 3, new MoveArm()));
+
 
     }
 
+
+
 }
+
