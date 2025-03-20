@@ -1,5 +1,6 @@
 package src.Craft.CraftProcesses;
 
+import src.Craft.Detection.ScanWithCamera;
 import src.Craft.ProcessQueue.ProcessBase;
 import src.Craft.ProcessQueue.ProcessControlBlock;
 import src.Craft.ProcessQueue.ProcessQueue;
@@ -8,7 +9,7 @@ import src.Craft.craftThread;
 public class HeartbeatProcess implements ProcessBase
 {
 
-    final private ProcessQueue queue = craftThread.getMainQueue();;
+    final private ProcessQueue queue = craftThread.getMainQueue();
 
 
 
@@ -35,9 +36,9 @@ public class HeartbeatProcess implements ProcessBase
         double test = Math.random();
 
         if(test>0.5)
-            queue.addProcess(new ProcessControlBlock("hello",2, new HeartbeatProcess()));
+            queue.addProcess(new ProcessControlBlock("from heartbeat",2, new ScanWithCamera()));
         else
-            queue.addProcess(new ProcessControlBlock("goodbye",1, new HeartbeatProcess()));
+            queue.addProcess(new ProcessControlBlock("heartbeat to heartbeat",5, new HeartbeatProcess()));
 
     }
 
