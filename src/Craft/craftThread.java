@@ -15,14 +15,14 @@ import java.lang.Math;
  * */
 public class craftThread implements Runnable
 {
-    private ProcessQueue mainQueue;
+    private static ProcessQueue mainQueue;
     private ProcessManagerUI ui;
     private volatile boolean isRunning = true; // Controls execution state
     /**
      * This is the priority queue of the craft.
      * This is used to hold the current tasks that the craft has to do.
      */
-    private static final ProcessQueue mainQueue = new ProcessQueue();
+    //private static final ProcessQueue mainQueue = new ProcessQueue();
 
 
 

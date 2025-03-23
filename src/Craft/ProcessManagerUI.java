@@ -12,6 +12,8 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.List;
+import javax.swing.JTabbedPane;
+
 
 public class ProcessManagerUI extends JFrame {
     private JTextArea debugLog;
@@ -31,12 +33,18 @@ public class ProcessManagerUI extends JFrame {
     private Map<ProcessControlBlock, JLabel> progressLabels;
     private JComboBox<String> processDropdown;
     private SimpleDateFormat timeFormatter;
+    private JTabbedPane tabbedPane;
+
 
     public ProcessManagerUI() {
         setTitle("Process Manager");
         setSize(1300, 800); // Increased window size
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setLayout(new BorderLayout());
+
+
+
 
         // Initialize queue and UI elements
         processQueue = new ProcessQueue();
@@ -75,6 +83,14 @@ public class ProcessManagerUI extends JFrame {
         removeProcessButton = new JButton("Remove Selected Process");
         clearAllButton = new JButton("Clear All Processes");
 
+        tabbedPane = new JTabbedPane();
+        tabbedPane.addTab("Add Processes", createAddProcessPanel());
+        tabbedPane.addTab("Queue Details", createQueueDetailsPanel());
+        tabbedPane.addTab("Requests", createRequestPanel());
+
+        add(tabbedPane, BorderLayout.CENTER);
+        add(new JScrollPane(debugLog), BorderLayout.EAST);
+
         priorityDropdown = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5});
         executionTimeSlider = new JSlider(1, 10, 5);
         executionTimeSlider.setMajorTickSpacing(1);
@@ -109,17 +125,86 @@ public class ProcessManagerUI extends JFrame {
         clearAllButton.addActionListener(e -> clearAllProcesses()); // New button listener
 
         // UI Layout
+        /*
         add(controlPanel, BorderLayout.NORTH);
         add(queueScrollPane, BorderLayout.WEST);
         add(new JScrollPane(debugLog), BorderLayout.CENTER);
         add(progressScrollPane, BorderLayout.EAST);
         add(startPauseButton, BorderLayout.SOUTH);
+         */
 
         // Start the background thread for execution
         craft = new craftThread(processQueue, this);
         craftThreadInstance = new Thread(craft);
         craftThreadInstance.start();
     }
+
+    private JPanel createAddProcessPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        JPanel controlPanel = new JPanel(new GridLayout(6, 2, 10, 10));
+
+        JButton addAnalysisProcess = new JButton("Add Analysis Process");
+        JButton addArmProcess = new JButton("Add Arm Process");
+        removeProcessButton = new JButton("Remove Selected Process");
+        clearAllButton = new JButton("Clear All Processes");
+
+        priorityDropdown = new JComboBox<>(new Integer[]{0, 1, 2, 3, 4, 5});
+        executionTimeSlider = new JSlider(1, 10, 5);
+        executionTimeSlider.setMajorTickSpacing(1);
+        executionTimeSlider.setPaintTicks(true);
+        executionTimeSlider.setPaintLabels(true);
+
+        processDropdown = new JComboBox<>();
+        processDropdown.setPreferredSize(new Dimension(200, 30));
+
+        controlPanel.add(new JLabel("Priority:"));
+        controlPanel.add(priorityDropdown);
+        controlPanel.add(new JLabel("Execution Time (sec):"));
+        controlPanel.add(executionTimeSlider);
+        controlPanel.add(addAnalysisProcess);
+        controlPanel.add(addArmProcess);
+        controlPanel.add(new JLabel("Select Process to Remove:"));
+        controlPanel.add(processDropdown);
+        controlPanel.add(removeProcessButton);
+        controlPanel.add(clearAllButton);
+
+        addAnalysisProcess.addActionListener(e -> addProcessToQueue(new AnalysisProcess(), "Analysis Process"));
+        addArmProcess.addActionListener(e -> addProcessToQueue(new ArmProcess(), "Arm Process"));
+        removeProcessButton.addActionListener(e -> removeSelectedProcess());
+        clearAllButton.addActionListener(e -> clearAllProcesses());
+
+        panel.add(controlPanel, BorderLayout.NORTH);
+        return panel;
+    }
+    private JPanel createQueueDetailsPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+
+        queueTextPane = new JTextPane();
+        queueTextPane.setEditable(false);
+        JScrollPane queueScrollPane = new JScrollPane(queueTextPane);
+        queueScrollPane.setPreferredSize(new Dimension(400, 600));
+
+        progressPanel = new JPanel();
+        progressPanel.setLayout(new BoxLayout(progressPanel, BoxLayout.Y_AXIS));
+        JScrollPane progressScrollPane = new JScrollPane(progressPanel);
+        progressScrollPane.setPreferredSize(new Dimension(450, 600));
+
+        panel.add(queueScrollPane, BorderLayout.WEST);
+        panel.add(progressScrollPane, BorderLayout.EAST);
+
+        return panel;
+    }
+    private JPanel createRequestPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        add(startPauseButton, BorderLayout.SOUTH);
+        JLabel label = new JLabel("Custom requests can go here (e.g. diagnostics, input fields, API triggers).");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(label, BorderLayout.CENTER);
+        return panel;
+    }
+
 
     private void addProcessToQueue(ProcessBase process, String name) {
         int priority = (int) priorityDropdown.getSelectedItem();

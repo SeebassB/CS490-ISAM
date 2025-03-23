@@ -1,5 +1,7 @@
 package src.Craft.ProcessQueue;
 
+import src.Craft.Capture.Store;
+
 public class ProcessControlBlock
 {
     private static int idCounter = 1; // Unique ID counter
@@ -50,6 +52,16 @@ public class ProcessControlBlock
         this.executionTime = executionTime;
         this.previous = previous;
         this.next = next;
+    }
+
+    public ProcessControlBlock(String fromAnalyze, int i, ProcessBase store)
+    {
+        this.processID = idCounter++;
+
+        this.name = fromAnalyze;
+        this.priority = i;
+        this.executionTime = executionTime;
+        this.proc = store;
     }
 
 
