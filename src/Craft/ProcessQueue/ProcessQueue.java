@@ -1,6 +1,8 @@
 package src.Craft.ProcessQueue;
 
 
+import src.Craft.ProcessManagerUI;
+
 public class ProcessQueue
 {
     ProcessControlBlock head;
@@ -31,6 +33,7 @@ public class ProcessQueue
      * */
     public boolean addProcess(ProcessControlBlock toBeAdded)
     {
+
 
         toBeAdded.updateProcessID(this.processID);
         this.processID++;

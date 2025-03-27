@@ -23,7 +23,7 @@ public class ProcessControlBlock
         this.name     = "DEFAULT NAME";
         this.priority = 5;
         this.processID = -1;
-        this.executionTime = 5; // Default execution time
+        this.executionTime = 10; // Default execution time
         this.previous = null;
         this.next   = null;
     }
@@ -60,7 +60,7 @@ public class ProcessControlBlock
 
         this.name = fromAnalyze;
         this.priority = i;
-        this.executionTime = executionTime;
+        this.executionTime = 5;
         this.proc = store;
     }
 

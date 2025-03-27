@@ -5,6 +5,8 @@ import src.Craft.CraftProcesses.HeartbeatProcess;
 import src.Craft.Detection.DetectionProcess;
 import src.Craft.ProcessQueue.ProcessControlBlock;
 import src.Craft.ProcessQueue.ProcessQueue;
+
+import javax.swing.*;
 import java.lang.Math;
 
 
@@ -15,7 +17,9 @@ import java.lang.Math;
  * */
 public class craftThread implements Runnable
 {
-    private static ProcessQueue mainQueue;
+    private static final ProcessQueue mainQueue = new ProcessQueue();
+
+    private ProcessQueue queue;
     private ProcessManagerUI ui;
     private volatile boolean isRunning = true; // Controls execution state
     /**
@@ -28,7 +32,7 @@ public class craftThread implements Runnable
 
     public craftThread(ProcessQueue queue, ProcessManagerUI ui)
     {
-        this.mainQueue = queue;
+        this.queue = queue;
         this.ui = ui;
     }
 
@@ -37,6 +41,7 @@ public class craftThread implements Runnable
             if (isRunning && !mainQueue.isEmpty()) {
                 ProcessControlBlock process = mainQueue.executeFirst();
                 if (process != null) {
+                    ui.setCurrentProcess(process);
                     ui.logMessage("Executing: " + process.getName());
                     executeWithProgress(process);
                 }
@@ -58,16 +63,32 @@ public class craftThread implements Runnable
 
         for (int i = 0; i <= steps; i++) {
             if (!ui.isRunning()) return;
-            ui.updateProgress(pcb, i * 10);
+
+            // Time left (approx)
+            int secondsLeft = duration - (i * duration / steps);
+
+            // Wrap the UI update in invokeLater
+            final int finalSecondsLeft = secondsLeft;
+            SwingUtilities.invokeLater(() -> {
+                ui.updateTimeLeft(pcb, finalSecondsLeft);
+            });
+
+            // Also update the progress bar from the EDT
+            final int progressValue = i * 10;
+            SwingUtilities.invokeLater(() -> {
+                ui.updateProgress(pcb, progressValue);
+            });
+
             try {
                 Thread.sleep(delay);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-
-
-        ui.updateProgress(pcb, 100);
+        SwingUtilities.invokeLater(() -> {
+            ui.updateProgress(pcb, 100);
+            ui.updateTimeLeft(pcb, 0);
+        });
     }
 
 

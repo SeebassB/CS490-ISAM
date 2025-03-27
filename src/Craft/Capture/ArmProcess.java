@@ -52,7 +52,7 @@ public class ArmProcess implements ProcessBase {
         //
         //
         //
-        queue.addProcess(new ProcessControlBlock("goodbye",1, new HeartbeatProcess()));
+       // queue.addProcess(new ProcessControlBlock("goodbye",1, new HeartbeatProcess()));
 
 
     }
